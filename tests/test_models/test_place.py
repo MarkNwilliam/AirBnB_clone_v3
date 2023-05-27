@@ -6,6 +6,7 @@ from os import getenv
 from models.place import Place
 from models.base_model import BaseModel
 import pep8
+import time
 
 
 class TestPlace(unittest.TestCase):
@@ -86,9 +87,11 @@ class TestPlace(unittest.TestCase):
 
     @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'DB')
     def test_save_Place(self):
-        """test if the save works"""
-        self.place.save()
-        self.assertNotEqual(self.place.created_at, self.place.updated_at)
+       """test if the save works"""
+       old_updated_at = self.place.updated_at
+       time.sleep(1)
+       self.place.save()
+       self.assertNotEqual(old_updated_at, self.place.updated_at)
 
     def test_to_dict_Place(self):
         """test if dictionary works"""

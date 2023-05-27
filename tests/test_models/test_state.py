@@ -5,6 +5,7 @@ import os
 from models.state import State
 from models.base_model import BaseModel
 import pep8
+import time
 
 
 class TestState(unittest.TestCase):
@@ -55,8 +56,10 @@ class TestState(unittest.TestCase):
 
     def test_save_State(self):
         """test if the save works"""
+        old_updated_at = self.state.updated_at
+        time.sleep(1)
         self.state.save()
-        self.assertNotEqual(self.state.created_at, self.state.updated_at)
+        self.assertNotEqual(old_updated_at, self.state.updated_at)
 
     def test_to_dict_State(self):
         """test if dictionary works"""

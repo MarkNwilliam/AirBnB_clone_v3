@@ -5,7 +5,7 @@ import os
 from os import getenv
 from models.base_model import BaseModel
 import pep8
-
+import time
 
 class TestBaseModel(unittest.TestCase):
     """this will test the base model class"""
@@ -56,8 +56,10 @@ class TestBaseModel(unittest.TestCase):
     @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'DB')
     def test_save_BaesModel(self):
         """test if the save works"""
+        old_updated_at = self.base.updated_at
+        time.sleep(1)
         self.base.save()
-        self.assertNotEqual(self.base.created_at, self.base.updated_at)
+        self.assertNotEqual(old_updated_at, self.base.updated_at)
 
     def test_to_dict_BaseModel(self):
         """test if dictionary works"""

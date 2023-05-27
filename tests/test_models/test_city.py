@@ -6,6 +6,7 @@ from os import getenv
 from models.city import City
 from models.base_model import BaseModel
 import pep8
+import time
 
 
 class TestCity(unittest.TestCase):
@@ -60,8 +61,10 @@ class TestCity(unittest.TestCase):
     @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'DB')
     def test_save_City(self):
         """test if the save works"""
+        old_updated_at = self.city.updated_at
+        time.sleep(1)
         self.city.save()
-        self.assertNotEqual(self.city.created_at, self.city.updated_at)
+        self.assertNotEqual(old_updated_at, self.city.updated_at)
 
     def test_to_dict_City(self):
         """test if dictionary works"""

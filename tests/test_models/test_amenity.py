@@ -5,7 +5,7 @@ import os
 from models.amenity import Amenity
 from models.base_model import BaseModel
 import pep8
-
+import time
 
 class TestAmenity(unittest.TestCase):
     """this will test the Amenity class"""
@@ -55,8 +55,10 @@ class TestAmenity(unittest.TestCase):
 
     def test_save_Amenity(self):
         """test if the save works"""
+        old_updated_at = self.amenity.updated_at
+        time.sleep(1)  
         self.amenity.save()
-        self.assertNotEqual(self.amenity.created_at, self.amenity.updated_at)
+        self.assertNotEqual(old_updated_at, self.amenity.updated_at)
 
     def test_to_dict_Amenity(self):
         """test if dictionary works"""
