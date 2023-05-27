@@ -12,6 +12,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models.engine.file_storage import FileStorage
+from models.state import State
+
 
 
 class TestFileStorage(unittest.TestCase):
@@ -90,6 +92,19 @@ class TestFileStorage(unittest.TestCase):
             for line in r:
                 self.assertEqual(line, "{}")
         self.assertIs(self.storage.reload(), None)
+    
+    def test_get(self):
+        """Test that get correctly retrieves an object"""
+        state = State(name="California")
+        state.save()
+        self.assertIs(state, storage.get(State, state.id))
+
+    def test_count(self):
+        """Test that count correctly counts all objects"""
+        initial_count = storage.count()
+        state = State(name="California")
+        state.save()
+        self.assertEqual(storage.count(), initial_count + 1)
 
 
 if __name__ == "__main__":

@@ -14,6 +14,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models.engine.db_storage import DBStorage
+from models.state import State
+
 
 
 @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', 'NO DB')
@@ -80,6 +82,19 @@ class TestDBStorage(unittest.TestCase):
         self.query.execute("SELECT * FROM states")
         salida = self.query.fetchall()
         self.assertEqual(len(salida), 1)
+     
+    def test_get(self):
+        """Test that get correctly retrieves an object"""
+        state = State(name="California")
+        state.save()
+        self.assertIs(state, storage.get(State, state.id))
+
+    def test_count(self):
+        """Test that count correctly counts all objects"""
+        initial_count = storage.count()
+        state = State(name="California")
+        state.save()
+        self.assertEqual(storage.count(), initial_count + 1)
 
 
 if __name__ == "__main__":
