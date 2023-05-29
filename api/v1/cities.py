@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """cities"""
+
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
@@ -82,3 +83,4 @@ def updates_city(city_id):
             obj.name = request.json['name']
     storage.save()
     return jsonify(city_obj[0]), 200
+    
