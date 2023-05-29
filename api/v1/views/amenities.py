@@ -74,3 +74,4 @@ def updates_amenity(amenity_id):
             obj.name = request.json['name']
     storage.save()
     return jsonify(amenity_object[0]), 200
+    

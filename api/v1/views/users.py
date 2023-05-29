@@ -90,3 +90,4 @@ def updates_user(user_id):
                 pass
     storage.save()
     return jsonify(user_obj[0]), 200
+    

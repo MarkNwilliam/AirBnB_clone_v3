@@ -121,3 +121,4 @@ def updates_place(place_id):
                 obj.longitude = request.json['longitude']
     storage.save()
     return jsonify(place_obj[0]), 200
+    

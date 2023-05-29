@@ -70,3 +70,4 @@ def updates_state(state_id):
             obj.name = request.json['name']
     storage.save()
     return jsonify(state_obj[0]), 200
+    
